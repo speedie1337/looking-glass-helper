@@ -1,4 +1,4 @@
 #!/sbin/openrc-run
 # Looking Glass OpenRC service
-touch /dev/shm/looking-glass && chown $(whoami):kvm /dev/shm/looking-glass && chmod 660 /dev/shm/looking-glass"
+/bin/sh /usr/bin/lg_start.sh
 exit
