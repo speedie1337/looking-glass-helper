@@ -1,6 +1,6 @@
 #!/bin/sh
 
-utilver="v0.1"
+utilver="v0.2"
 
 # URLs, you probably do not need to change these since they automatically fetch the latest release
 url_stable="https://looking-glass.io/artifact/stable/source"
@@ -39,7 +39,7 @@ fi
 
 echo -n "Which user will be using Looking Glass? > " && read user
 
-test /home/anon || echo "$user is not valid." ; exit 1
+test $user || echo "$user is not valid." ; exit 1
 echo "$user is valid."
 
 # Check distro based on package manager
@@ -113,9 +113,9 @@ test -f *.tar.gz && tar xpvf *.tar.gz && echo "Extracted Looking Glass source co
 
 # Create services
 if [ "$init" = "systemd" ]; then
-	curl -o /etc/systemd/system/lg_start.service https://raw.githubusercontent.com/speediegamer/looking-glass-helper/services/lg_start.service && chmod 644 /etc/systemd/system/lg_start.service && echo "Created Systemd service"
+	curl -o /etc/systemd/system/lg_start.service https://raw.githubusercontent.com/speediegq/looking-glass-helper/services/lg_start.service && chmod 644 /etc/systemd/system/lg_start.service && echo "Created Systemd service"
 else
-	curl -o /etc/init.d/lg_start.service https://raw.githubusercontent.com/speediegamer/looking-glass-helper/services/lg_start && chmod 644 /etc/init.d/lg_start.service && echo "Created OpenRC service"
+	curl -o /etc/init.d/lg_start.service https://raw.githubusercontent.com/speediegq/looking-glass-helper/services/lg_start && chmod 644 /etc/init.d/lg_start.service && echo "Created OpenRC service"
 fi
 
 echo "touch /dev/shm/looking-glass && chown $user:kvm /dev/shm/looking-glass && chmod 660 /dev/shm/looking-glass" > /usr/bin/lg_start.sh && echo "Created script"
